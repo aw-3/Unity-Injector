@@ -383,7 +383,6 @@ private: System::Void btnInject_Click(System::Object^  sender, System::EventArgs
 }
 private: System::Void comboProcesses_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
 	btnInject->Enabled = comboProcesses->SelectedIndex != -1;
-	UpdateListProcesses();
 }
 private: System::Void entrypointDefinitionToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	MessageBox::Show("Class Loader { static void Load(); }");
