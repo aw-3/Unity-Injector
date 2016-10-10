@@ -114,10 +114,10 @@ void* Utility::GetProcAddressEx(void* pModuleBase, std::string procName)
 
 		for (ULONG i = 0; i < numberOfNames; i++) {
 			
-			PCSTR pszName = (PCSTR)((PUCHAR)pModuleBase + (int)GetPtrFromRVA<IMAGE_NT_HEADERS32>(pAddressOfNames[i], pNtHdrs32, (PBYTE)pModuleBase));
+			PCSTR pszName = (PCSTR)(GetPtrFromRVA<IMAGE_NT_HEADERS32>(pAddressOfNames[i], pNtHdrs32, (PBYTE)pModuleBase));
 			SHORT ordinal = pAddressOfOrdinals[i];
-			if (procName == pszName) {
-				return GetPtrFromRVA<IMAGE_NT_HEADERS32>(pAddressOfFunctions[ordinal], pNtHdrs32, (PBYTE)pModuleBase);
+			if (/*procName == pszName*/ std::string(pszName).find(procName) != std::string::npos) { // HACK
+				return (void*)pAddressOfFunctions[ordinal];
 			}
 		}
 	}
